@@ -1,0 +1,33 @@
+﻿<Window x:Class="udodPizza.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:udodPizza"
+        mc:Ignorable="d"
+        Title="Window1" Height="480" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="37,32,0,0" TextWrapping="Wrap" Text="Данные заказчика" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox x:Name="nameTxt" HorizontalAlignment="Left" Margin="37,143,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="179"/>
+        <TextBox x:Name="adressTxt" HorizontalAlignment="Left" Margin="37,238,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="179"/>
+        <TextBox x:Name="telTxt" HorizontalAlignment="Left" Margin="37,336,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="179"/>
+        <Label Content="Имя заказчика" HorizontalAlignment="Left" Margin="37,117,0,0" VerticalAlignment="Top"/>
+        <Label Content="Адрес доставки" HorizontalAlignment="Left" Margin="37,212,0,0" VerticalAlignment="Top"/>
+        <Label Content="Телефон" HorizontalAlignment="Left" Margin="37,310,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="listOrder" Margin="400,72,57,208">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Binding="{Binding categoty}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Binding="{Binding name_f}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Binding="{Binding price}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Binding="{Binding count}" IsReadOnly="True" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="400,24,0,0" TextWrapping="Wrap" Text="Содержимое заказа" VerticalAlignment="Top" FontSize="20"/>
+        <TextBlock x:Name="summOrder" HorizontalAlignment="Left" Margin="520,276,0,0" TextWrapping="Wrap" Text="Сумма заказа: " VerticalAlignment="Top" Width="218" FontSize="16"/>
+        <TextBlock x:Name="discount" HorizontalAlignment="Left" Margin="520,316,0,0" TextWrapping="Wrap" Text="Скидка: " VerticalAlignment="Top" FontSize="16" Width="218"/>
+        <TextBlock x:Name="itog" HorizontalAlignment="Left" Margin="520,357,0,0" TextWrapping="Wrap" Text="Итого: " VerticalAlignment="Top" FontSize="16"/>
+        <Button x:Name="confirmBtn" Content="Оформить" HorizontalAlignment="Left" Margin="520,415,0,0" VerticalAlignment="Top" Width="182"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="udodPizza.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:udodPizza"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="800">
+    <Grid Margin="0,0,0,-6">
+        <DataGrid x:Name="listProduct" Margin="0,37,36,0" Height="276" VerticalAlignment="Top" HorizontalAlignment="Right" Width="560" AutoGenerateColumns="False" SelectionChanged="listProduct_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding id}" Width="*" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding cat}" IsReadOnly="False" Width="*"/>
+                <DataGridTextColumn Binding="{Binding name_f}" IsReadOnly="False" Width="*"/>
+                <DataGridTextColumn Binding="{Binding price}" IsReadOnly="False" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock HorizontalAlignment="Left" Margin="26,37,0,0" TextWrapping="Wrap" Text="Выберите содержимое заказа" VerticalAlignment="Top" Height="90" Width="130" FontSize="20"/>
+        <Button x:Name="confitmBtn" Content="Заказать" HorizontalAlignment="Left" Height="26" Margin="587,381,0,0" VerticalAlignment="Top" Width="177" Click="confitmBtn_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,193,0,0" TextWrapping="Wrap" Text="Наши скидки:" VerticalAlignment="Top" FontSize="20" RenderTransformOrigin="0.463,-1.532"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,237,0,0" TextWrapping="Wrap" Text="от 1000 р. - 5%" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,279,0,0" TextWrapping="Wrap" Text="от 2000 р. - 10%" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,320,0,0" TextWrapping="Wrap" Text="от 3000 р. - 15%" VerticalAlignment="Top" FontSize="16"/>
+        <Rectangle HorizontalAlignment="Left" Height="179" Margin="10,179,0,0" Stroke="Black" VerticalAlignment="Top" Width="159"/>
+        <TextBlock x:Name="nameFood" HorizontalAlignment="Left" Margin="204,331,0,0" Visibility="Hidden" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="27" Width="110" FontSize="14"/>
+        <TextBox x:Name="countFood" HorizontalAlignment="Left" Margin="283,377,0,0" Visibility="Hidden" TextWrapping="Wrap" VerticalAlignment="Top" Width="31"/>
+        <Label x:Name="countLabel" Content="Количество" HorizontalAlignment="Left" Visibility="Hidden" Margin="204,373,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="addOrder" Content="Добавить в заказ" HorizontalAlignment="Left" Visibility="Hidden" Margin="210,463,0,0" VerticalAlignment="Top" Width="177" Click="addOrder_Click"/>
+
+    </Grid>
+</Window>

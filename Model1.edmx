@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище UdodPizzaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id_c" />
+          </Key>
+          <Property Name="id_c" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_c" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="id_ct" />
+          </Key>
+          <Property Name="id_ct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_o" Type="date" />
+          <Property Name="time_o" Type="time" Precision="7" />
+          <Property Name="name_ct" Type="nvarchar" MaxLength="250" />
+          <Property Name="adress" Type="nvarchar" MaxLength="250" />
+          <Property Name="tel" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="comment" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="food">
+          <Key>
+            <PropertyRef Name="id_f" />
+          </Key>
+          <Property Name="id_f" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_f" Type="nvarchar" MaxLength="250" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="id_c" Type="int" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_o" />
+          </Key>
+          <Property Name="id_o" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="count" Type="int" />
+          <Property Name="id_f" Type="int" />
+          <Property Name="id_ct" Type="int" />
+        </EntityType>
+        <EntityType Name="promo">
+          <Key>
+            <PropertyRef Name="id_p" />
+          </Key>
+          <Property Name="id_p" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="total_price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="procent" Type="int" />
+        </EntityType>
+        <Association Name="FK_food_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="food" Type="Self.food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id_c" />
+            </Principal>
+            <Dependent Role="food">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_customers">
+          <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="id_ct" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_ct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_food">
+          <End Role="food" Type="Self.food" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="food">
+              <PropertyRef Name="id_f" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_f" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UdodPizzaModelContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="food" EntityType="Self.food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="promo" EntityType="Self.promo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_food_category" Association="Self.FK_food_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="food" EntitySet="food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_food" Association="Self.FK_orders_food">
+            <End Role="food" EntitySet="food" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UdodPizzaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id_c" />
+          </Key>
+          <Property Name="id_c" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_c" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="food" Relationship="Self.FK_food_category" FromRole="category" ToRole="food" />
+        </EntityType>
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="id_ct" />
+          </Key>
+          <Property Name="id_ct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_o" Type="DateTime" Precision="0" />
+          <Property Name="time_o" Type="Time" Precision="7" />
+          <Property Name="name_ct" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="adress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="total_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_customers" FromRole="customers" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="food">
+          <Key>
+            <PropertyRef Name="id_f" />
+          </Key>
+          <Property Name="id_f" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_f" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="id_c" Type="Int32" />
+          <NavigationProperty Name="category" Relationship="Self.FK_food_category" FromRole="food" ToRole="category" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_orders_food" FromRole="food" ToRole="orders" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="id_o" />
+          </Key>
+          <Property Name="id_o" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="count" Type="Int32" />
+          <Property Name="id_f" Type="Int32" />
+          <Property Name="id_ct" Type="Int32" />
+          <NavigationProperty Name="customers" Relationship="Self.FK_orders_customers" FromRole="orders" ToRole="customers" />
+          <NavigationProperty Name="food" Relationship="Self.FK_orders_food" FromRole="orders" ToRole="food" />
+        </EntityType>
+        <EntityType Name="promo">
+          <Key>
+            <PropertyRef Name="id_p" />
+          </Key>
+          <Property Name="id_p" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="total_price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="procent" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_food_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="food" Type="Self.food" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id_c" />
+            </Principal>
+            <Dependent Role="food">
+              <PropertyRef Name="id_c" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_customers">
+          <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customers">
+              <PropertyRef Name="id_ct" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_ct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_food">
+          <End Role="food" Type="Self.food" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="food">
+              <PropertyRef Name="id_f" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="id_f" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UdodPizzaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="category" EntityType="Self.category" />
+          <EntitySet Name="customers" EntityType="Self.customers" />
+          <EntitySet Name="food" EntityType="Self.food" />
+          <EntitySet Name="orders" EntityType="Self.orders" />
+          <EntitySet Name="promo" EntityType="Self.promo" />
+          <AssociationSet Name="FK_food_category" Association="Self.FK_food_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="food" EntitySet="food" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_customers" Association="Self.FK_orders_customers">
+            <End Role="customers" EntitySet="customers" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_food" Association="Self.FK_orders_food">
+            <End Role="food" EntitySet="food" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UdodPizzaModelContainer" CdmEntityContainer="UdodPizzaEntities">
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="UdodPizzaModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id_c" ColumnName="id_c" />
+                <ScalarProperty Name="name_c" ColumnName="name_c" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="UdodPizzaModel.customers">
+              <MappingFragment StoreEntitySet="customers">
+                <ScalarProperty Name="id_ct" ColumnName="id_ct" />
+                <ScalarProperty Name="date_o" ColumnName="date_o" />
+                <ScalarProperty Name="time_o" ColumnName="time_o" />
+                <ScalarProperty Name="name_ct" ColumnName="name_ct" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="food">
+            <EntityTypeMapping TypeName="UdodPizzaModel.food">
+              <MappingFragment StoreEntitySet="food">
+                <ScalarProperty Name="id_f" ColumnName="id_f" />
+                <ScalarProperty Name="name_f" ColumnName="name_f" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="id_c" ColumnName="id_c" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="UdodPizzaModel.orders">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="id_o" ColumnName="id_o" />
+                <ScalarProperty Name="count" ColumnName="count" />
+                <ScalarProperty Name="id_f" ColumnName="id_f" />
+                <ScalarProperty Name="id_ct" ColumnName="id_ct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="promo">
+            <EntityTypeMapping TypeName="UdodPizzaModel.promo">
+              <MappingFragment StoreEntitySet="promo">
+                <ScalarProperty Name="id_p" ColumnName="id_p" />
+                <ScalarProperty Name="total_price" ColumnName="total_price" />
+                <ScalarProperty Name="procent" ColumnName="procent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
